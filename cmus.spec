@@ -224,7 +224,7 @@ oss plugin cmus-hoz
 
 %build
 
-./configure prefix=%{_prefix}
+./configure prefix=%{_prefix} libdir=%{_libdir} mandir=%{_mandir} bindir=%{_bindir}
 %{__make}
 
 
