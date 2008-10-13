@@ -245,69 +245,79 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS HACKING README
 %attr(755,root,root) %{_bindir}/*
-%dir %{_libdir}/cmus
-%dir %{_libdir}/cmus/op
 %{_datadir}/%{name}
 %{_mandir}/man1/cmus*
 
 # input plugins
 %files aac
 %defattr(644,root,root,755)
+%dir %{_libdir}/cmus
 %dir %{_libdir}/cmus/ip
 %{_libdir}/cmus/ip/aac.so
 
 %files ffmpeg
 %defattr(644,root,root,755)
+%dir %{_libdir}/cmus
 %dir %{_libdir}/cmus/ip
 %{_libdir}/cmus/ip/ffmpeg.so
 
 %files flac
 %defattr(644,root,root,755)
+%dir %{_libdir}/cmus
 %dir %{_libdir}/cmus/ip
 %{_libdir}/cmus/ip/flac.so
 
 %files mad
 %defattr(644,root,root,755)
+%dir %{_libdir}/cmus
 %dir %{_libdir}/cmus/ip
 %{_libdir}/cmus/ip/mad.so
 
 %files modplug
 %defattr(644,root,root,755)
+%dir %{_libdir}/cmus
 %dir %{_libdir}/cmus/ip
 %{_libdir}/cmus/ip/modplug.so
 
 %files mp4
 %defattr(644,root,root,755)
+%dir %{_libdir}/cmus
 %dir %{_libdir}/cmus/ip
 %{_libdir}/cmus/ip/mp4.so
 
 %files vorbis
 %defattr(644,root,root,755)
+%dir %{_libdir}/cmus
 %dir %{_libdir}/cmus/ip
 %{_libdir}/cmus/ip/vorbis.so
 
 %files wav
 %defattr(644,root,root,755)
+%dir %{_libdir}/cmus
 %dir %{_libdir}/cmus/ip
 %{_libdir}/cmus/ip/wav.so
 
 %files wavpack
 %defattr(644,root,root,755)
+%dir %{_libdir}/cmus
 %dir %{_libdir}/cmus/ip
 %{_libdir}/cmus/ip/wavpack.so
 
 # output plugins
 %files alsa
 %defattr(644,root,root,755)
+%dir %{_libdir}/cmus
 %dir %{_libdir}/cmus/op
 %{_libdir}/cmus/op/alsa.so
 
 %files libao
 %defattr(644,root,root,755)
+%dir %{_libdir}/cmus
 %dir %{_libdir}/cmus/op
 %{_libdir}/cmus/op/ao.so
 
 %files oss
 %defattr(644,root,root,755)
+%dir %{_libdir}/cmus
 %dir %{_libdir}/cmus/op
 %{_libdir}/cmus/op/oss.so
