@@ -2,7 +2,7 @@ Summary:	cmus is a small and fast text mode music player
 Summary(hu.UTF-8):	cmus egy kicsi és gyors szöveges zenelejátszó
 Name:		cmus
 Version:	2.2.0
-Release:	0.1
+Release:	0.2
 License:	GPL
 Group:		Applications/Sound
 Source0:	http://mirror.greaterscope.net/cmus/%{name}-%{version}.tar.bz2
@@ -21,6 +21,8 @@ BuildRequires:	mpeg4ip-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	sed > 4.0
 BuildRequires:	wavpack-devel
+Suggests:	%{name}-input
+Suggests:	%{name}-output
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -234,6 +236,7 @@ install -d $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+install cmus-status-display $RPM_BUILD_ROOT%{_datadir}/cmus
 
 mv $RPM_BUILD_ROOT%{_docdir}/cmus/* $RPM_BUILD_ROOT%{_docdir}/cmus-%{version}
 rmdir $RPM_BUILD_ROOT%{_docdir}/cmus
