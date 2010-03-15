@@ -1,12 +1,12 @@
 Summary:	cmus is a small and fast text mode music player
 Summary(hu.UTF-8):	cmus egy kicsi és gyors szöveges zenelejátszó
 Name:		cmus
-Version:	2.2.0
+Version:	2.3.1
 Release:	0.2
 License:	GPL
 Group:		Applications/Sound
-Source0:	http://mirror.greaterscope.net/cmus/%{name}-%{version}.tar.bz2
-# Source0-md5:	7a9895ecfc10cd16577c73051436962f
+Source0:	http://dl.sourceforge.net/project/cmus/%{name}-v%{version}.tar.bz2
+# Source0-md5:	1b77942c61dd7ddb63d4daf2a42ae58d
 URL:		http://cmus.sourceforge.net/
 BuildRequires:	alsa-lib-devel
 BuildRequires:	arts-devel
@@ -15,10 +15,12 @@ BuildRequires:	ffmpeg-devel
 BuildRequires:	libao-devel
 BuildRequires:	libmad-devel
 BuildRequires:	libmodplug-devel
+BuildRequires:	libmpcdec-devel
 BuildRequires:	libraw1394-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	mpeg4ip-devel
 BuildRequires:	ncurses-devel
+BuildRequires:	pkg-config
 BuildRequires:	sed > 4.0
 BuildRequires:	wavpack-devel
 Suggests:	%{name}-input
@@ -34,199 +36,191 @@ cmus egy kicsi és gyors szöveges zenelejátszó
 
 # input plugins
 
-%package aac
+%package input-aac
 Summary:	aac plugin for cmus
 Summary(hu.UTF-8):	aac plugin cmus-hoz
 Group:		Applications/Sound
 Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
-%description aac
+%description input-aac
 aac plugin for cmus
 
-%description aac -l hu.UTF-8
+%description input-aac -l hu.UTF-8
 aac plugin cmus-hoz
 
-
-%package ffmpeg
+%package input-ffmpeg
 Summary:	ffmpeg plugin for cmus
 Summary(hu.UTF-8):	ffmpeg plugin cmus-hoz
 Group:		Applications/Sound
 Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
-%description ffmpeg
+%description input-ffmpeg
 ffmpeg plugin for cmus
 
-%description ffmpeg -l hu.UTF-8
+%description input-ffmpeg -l hu.UTF-8
 ffmpeg plugin cmus-hoz
 
-
-%package flac
+%package input-flac
 Summary:	flac plugin for cmus
 Summary(hu.UTF-8):	flac plugin cmus-hoz
 Group:		Applications/Sound
 Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
-%description flac
+%description input-flac
 flac plugin for cmus
 
-%description flac -l hu.UTF-8
+%description input-flac -l hu.UTF-8
 flac plugin cmus-hoz
 
-
-%package mad
+%package input-mad
 Summary:	mad plugin for cmus
 Summary(hu.UTF-8):	mad plugin cmus-hoz
 Group:		Applications/Sound
 Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
-%description mad
+%description input-mad
 mad plugin for cmus
 
-%description mad -l hu.UTF-8
+%description input-mad -l hu.UTF-8
 mad plugin cmus-hoz
 
-
-%package modplug
+%package input-modplug
 Summary:	modplug plugin for cmus
 Summary(hu.UTF-8):	modplug plugin cmus-hoz
 Group:		Applications/Sound
 Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
-%description modplug
+%description input-modplug
 modplug plugin for cmus
 
-%description modplug -l hu.UTF-8
+%description input-modplug -l hu.UTF-8
 modplug plugin cmus-hoz
 
-
-%package mp4
+%package input-mp4
 Summary:	mp4 plugin for cmus
 Summary(hu.UTF-8):	mp4 plugin cmus-hoz
 Group:		Applications/Sound
 Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
-%description mp4
+%description input-mp4
 mp4 plugin for cmus
 
-%description mp4 -l hu.UTF-8
+%description input-mp4 -l hu.UTF-8
 mp4 plugin cmus-hoz
 
-
-%package vorbis
+%package input-vorbis
 Summary:	vorbis plugin for cmus
 Summary(hu.UTF-8):	vorbis plugin cmus-hoz
 Group:		Applications/Sound
 Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
-%description vorbis
+%description input-vorbis
 vorbis plugin for cmus
 
-%description vorbis -l hu.UTF-8
+%description input-vorbis -l hu.UTF-8
 vorbis plugin cmus-hoz
 
-
-%package wav
+%package input-wav
 Summary:	wav plugin for cmus
 Summary(hu.UTF-8):	wav plugin cmus-hoz
 Group:		Applications/Sound
 Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
-%description wav
+%description input-wav
 wav plugin for cmus
 
-%description wav -l hu.UTF-8
+%description input-wav -l hu.UTF-8
 wav plugin cmus-hoz
 
-
-%package wavpack
+%package input-wavpack
 Summary:	wavpack plugin for cmus
 Summary(hu.UTF-8):	wavpack plugin cmus-hoz
 Group:		Applications/Sound
 Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
-%description wavpack
+%description input-wavpack
 wavpack plugin for cmus
 
-%description wavpack -l hu.UTF-8
+%description input-wavpack -l hu.UTF-8
 wavpack plugin cmus-hoz
 
 
 # output plugins
 
-%package alsa
+%package output-alsa
 Summary:	alsa plugin for cmus
 Summary(hu.UTF-8):	alsa plugin cmus-hoz
 Group:		Applications/Sound
 Requires:	%{name} = %{version}
 Provides:	%{name}-output
 
-%description alsa
+%description output-alsa
 alsa plugin for cmus
 
-%description alsa -l hu.UTF-8
+%description output-alsa -l hu.UTF-8
 alsa plugin cmus-hoz
 
-
-%package arts
+%package output-arts
 Summary:	arts plugin for cmus
 Summary(hu.UTF-8):	arts plugin cmus-hoz
 Group:		Applications/Sound
 Requires:	%{name} = %{version}
 Provides:	%{name}-output
 
-%description arts
+%description output-arts
 arts plugin for cmus
 
-%description arts -l hu.UTF-8
+%description output-arts -l hu.UTF-8
 arts plugin cmus-hoz
 
-
-%package libao
+%package output-libao
 Summary:	libao plugin for cmus
 Summary(hu.UTF-8):	libao plugin cmus-hoz
 Group:		Applications/Sound
 Requires:	%{name} = %{version}
 Provides:	%{name}-output
 
-%description libao
+%description output-libao
 libao plugin for cmus
 
-%description libao -l hu.UTF-8
+%description output-libao -l hu.UTF-8
 libao plugin cmus-hoz
 
-
-%package oss
+%package output-oss
 Summary:	oss plugin for cmus
 Summary(hu.UTF-8):	oss plugin cmus-hoz
 Group:		Applications/Sound
 Requires:	%{name} = %{version}
 Provides:	%{name}-output
 
-%description oss
+%description output-oss
 oss plugin for cmus
 
-%description oss -l hu.UTF-8
+%description output-oss -l hu.UTF-8
 oss plugin cmus-hoz
 
-
-
 %prep
-%setup -q
+%setup -q -n %{name}-v%{version}
 %{__sed} -i "s|<curses.h>|<ncursesw/ncurses.h>|" command_mode.c keys.c options.c search_mode.c ui_curses.c
 %{__sed} -r -i "s|<ffmpeg/(.*).h|<lib\1/\1.h|" ffmpeg.c
 
 %build
 
-./configure prefix=%{_prefix} libdir=%{_libdir} mandir=%{_mandir} bindir=%{_bindir}
+./configure prefix=%{_prefix} \
+	libdir=%{_libdir} \
+	mandir=%{_mandir} \
+	bindir=%{_bindir} \
+	datadir=%{_datadir}/%{name} \
+	exampledir=%{_examplesdir}/%{name}
 %{__make}
 
 
@@ -238,89 +232,73 @@ install -d $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 install cmus-status-display $RPM_BUILD_ROOT%{_datadir}/cmus
 
-mv $RPM_BUILD_ROOT%{_docdir}/cmus/* $RPM_BUILD_ROOT%{_docdir}/cmus-%{version}
-rmdir $RPM_BUILD_ROOT%{_docdir}/cmus
+# mv $RPM_BUILD_ROOT%{_docdir}/cmus/* $RPM_BUILD_ROOT%{_docdir}/cmus-%{version}
+# rmdir $RPM_BUILD_ROOT%{_docdir}/cmus
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS HACKING README
+%dir %{_libdir}/cmus
+%dir %{_libdir}/cmus/ip
+%dir %{_libdir}/cmus/op
+%doc AUTHORS README
 %attr(755,root,root) %{_bindir}/*
 %{_datadir}/%{name}
 %{_mandir}/man1/cmus*
+%{_mandir}/man7/cmus*
 
 # input plugins
-%files aac
+%files input-aac
 %defattr(644,root,root,755)
-%dir %{_libdir}/cmus
-%dir %{_libdir}/cmus/ip
 %{_libdir}/cmus/ip/aac.so
 
-%files ffmpeg
+%files input-ffmpeg
 %defattr(644,root,root,755)
-%dir %{_libdir}/cmus
-%dir %{_libdir}/cmus/ip
 %{_libdir}/cmus/ip/ffmpeg.so
 
-%files flac
+%files input-flac
 %defattr(644,root,root,755)
-%dir %{_libdir}/cmus
-%dir %{_libdir}/cmus/ip
 %{_libdir}/cmus/ip/flac.so
 
-%files mad
+%files input-mad
 %defattr(644,root,root,755)
-%dir %{_libdir}/cmus
-%dir %{_libdir}/cmus/ip
 %{_libdir}/cmus/ip/mad.so
 
-%files modplug
+%files input-modplug
 %defattr(644,root,root,755)
-%dir %{_libdir}/cmus
-%dir %{_libdir}/cmus/ip
 %{_libdir}/cmus/ip/modplug.so
 
-%files mp4
+%files input-mp4
 %defattr(644,root,root,755)
-%dir %{_libdir}/cmus
-%dir %{_libdir}/cmus/ip
 %{_libdir}/cmus/ip/mp4.so
 
-%files vorbis
+%files input-vorbis
 %defattr(644,root,root,755)
-%dir %{_libdir}/cmus
-%dir %{_libdir}/cmus/ip
 %{_libdir}/cmus/ip/vorbis.so
 
-%files wav
+%files input-wav
 %defattr(644,root,root,755)
-%dir %{_libdir}/cmus
-%dir %{_libdir}/cmus/ip
 %{_libdir}/cmus/ip/wav.so
 
-%files wavpack
+%files input-wavpack
 %defattr(644,root,root,755)
-%dir %{_libdir}/cmus
-%dir %{_libdir}/cmus/ip
 %{_libdir}/cmus/ip/wavpack.so
 
 # output plugins
-%files alsa
+%files output-alsa
 %defattr(644,root,root,755)
-%dir %{_libdir}/cmus
-%dir %{_libdir}/cmus/op
 %{_libdir}/cmus/op/alsa.so
 
-%files libao
+%files output-libao
 %defattr(644,root,root,755)
-%dir %{_libdir}/cmus
-%dir %{_libdir}/cmus/op
 %{_libdir}/cmus/op/ao.so
 
-%files oss
+%files output-arts
 %defattr(644,root,root,755)
-%dir %{_libdir}/cmus
-%dir %{_libdir}/cmus/op
+%{_libdir}/cmus/op/arts.so
+
+%files output-oss
+%defattr(644,root,root,755)
 %{_libdir}/cmus/op/oss.so
