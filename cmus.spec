@@ -1,12 +1,12 @@
 Summary:	cmus is a small and fast text mode music player
 Summary(hu.UTF-8):	cmus egy kicsi és gyors szöveges zenelejátszó
 Name:		cmus
-Version:	2.3.1
-Release:	0.2
+Version:	2.3.2
+Release:	0.1
 License:	GPL
 Group:		Applications/Sound
-Source0:	http://dl.sourceforge.net/project/cmus/%{name}-v%{version}.tar.bz2
-# Source0-md5:	1b77942c61dd7ddb63d4daf2a42ae58d
+Source0:	http://downloads.sourceforge.net/project/cmus/%{name}-v%{version}.tar.bz2
+# Source0-md5:	47698e355cff2e7b985a22475099c100
 URL:		http://cmus.sourceforge.net/
 BuildRequires:	alsa-lib-devel
 BuildRequires:	arts-devel
@@ -28,10 +28,10 @@ Suggests:	%{name}-output
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-cmus is a small and fast text mode music player
+cmus is a small and fast text mode music player.
 
 %description -l pl.UTF-8
-cmus egy kicsi és gyors szöveges zenelejátszó
+cmus egy kicsi és gyors szöveges zenelejátszó.
 
 
 # input plugins
@@ -44,10 +44,10 @@ Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
 %description input-aac
-aac plugin for cmus
+aac plugin for cmus.
 
 %description input-aac -l hu.UTF-8
-aac plugin cmus-hoz
+aac plugin cmus-hoz.
 
 %package input-ffmpeg
 Summary:	ffmpeg plugin for cmus
@@ -57,10 +57,10 @@ Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
 %description input-ffmpeg
-ffmpeg plugin for cmus
+ffmpeg plugin for cmus.
 
 %description input-ffmpeg -l hu.UTF-8
-ffmpeg plugin cmus-hoz
+ffmpeg plugin cmus-hoz.
 
 %package input-flac
 Summary:	flac plugin for cmus
@@ -70,10 +70,10 @@ Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
 %description input-flac
-flac plugin for cmus
+flac plugin for cmus.
 
 %description input-flac -l hu.UTF-8
-flac plugin cmus-hoz
+flac plugin cmus-hoz.
 
 %package input-mad
 Summary:	mad plugin for cmus
@@ -83,10 +83,10 @@ Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
 %description input-mad
-mad plugin for cmus
+mad plugin for cmus.
 
 %description input-mad -l hu.UTF-8
-mad plugin cmus-hoz
+mad plugin cmus-hoz.
 
 %package input-modplug
 Summary:	modplug plugin for cmus
@@ -96,10 +96,10 @@ Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
 %description input-modplug
-modplug plugin for cmus
+modplug plugin for cmus.
 
 %description input-modplug -l hu.UTF-8
-modplug plugin cmus-hoz
+modplug plugin cmus-hoz.
 
 %package input-mp4
 Summary:	mp4 plugin for cmus
@@ -109,10 +109,23 @@ Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
 %description input-mp4
-mp4 plugin for cmus
+mp4 plugin for cmus.
 
 %description input-mp4 -l hu.UTF-8
-mp4 plugin cmus-hoz
+mp4 plugin cmus-hoz.
+
+%package input-mpc
+Summary:	mpc plugin for cmus
+Summary(hu.UTF-8):	mpc plugin cmus-hoz
+Group:		Applications/Sound
+Requires:	%{name} = %{version}
+Provides:	%{name}-input
+
+%description input-mpc
+mpc plugin for cmus.
+
+%description input-mpc -l hu.UTF-8
+mpc plugin cmus-hoz.
 
 %package input-vorbis
 Summary:	vorbis plugin for cmus
@@ -122,10 +135,10 @@ Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
 %description input-vorbis
-vorbis plugin for cmus
+vorbis plugin for cmus.
 
 %description input-vorbis -l hu.UTF-8
-vorbis plugin cmus-hoz
+vorbis plugin cmus-hoz.
 
 %package input-wav
 Summary:	wav plugin for cmus
@@ -135,10 +148,10 @@ Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
 %description input-wav
-wav plugin for cmus
+wav plugin for cmus.
 
 %description input-wav -l hu.UTF-8
-wav plugin cmus-hoz
+wav plugin cmus-hoz.
 
 %package input-wavpack
 Summary:	wavpack plugin for cmus
@@ -148,10 +161,10 @@ Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
 %description input-wavpack
-wavpack plugin for cmus
+wavpack plugin for cmus.
 
 %description input-wavpack -l hu.UTF-8
-wavpack plugin cmus-hoz
+wavpack plugin cmus-hoz.
 
 
 # output plugins
@@ -164,10 +177,10 @@ Requires:	%{name} = %{version}
 Provides:	%{name}-output
 
 %description output-alsa
-alsa plugin for cmus
+alsa plugin for cmus.
 
 %description output-alsa -l hu.UTF-8
-alsa plugin cmus-hoz
+alsa plugin cmus-hoz.
 
 %package output-arts
 Summary:	arts plugin for cmus
@@ -177,10 +190,10 @@ Requires:	%{name} = %{version}
 Provides:	%{name}-output
 
 %description output-arts
-arts plugin for cmus
+arts plugin for cmus.
 
 %description output-arts -l hu.UTF-8
-arts plugin cmus-hoz
+arts plugin cmus-hoz.
 
 %package output-libao
 Summary:	libao plugin for cmus
@@ -190,10 +203,10 @@ Requires:	%{name} = %{version}
 Provides:	%{name}-output
 
 %description output-libao
-libao plugin for cmus
+libao plugin for cmus.
 
 %description output-libao -l hu.UTF-8
-libao plugin cmus-hoz
+libao plugin cmus-hoz.
 
 %package output-oss
 Summary:	oss plugin for cmus
@@ -203,10 +216,23 @@ Requires:	%{name} = %{version}
 Provides:	%{name}-output
 
 %description output-oss
-oss plugin for cmus
+oss plugin for cmus.
 
 %description output-oss -l hu.UTF-8
-oss plugin cmus-hoz
+oss plugin cmus-hoz.
+
+%package output-pulse
+Summary:	pulse plugin for cmus
+Summary(hu.UTF-8):	pulse plugin cmus-hoz
+Group:		Applications/Sound
+Requires:	%{name} = %{version}
+Provides:	%{name}-output
+
+%description output-pulse
+pulse plugin for cmus.
+
+%description output-pulse -l hu.UTF-8
+pulse plugin cmus-hoz.
 
 %prep
 %setup -q -n %{name}-v%{version}
@@ -230,10 +256,6 @@ install -d $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-install cmus-status-display $RPM_BUILD_ROOT%{_datadir}/cmus
-
-# mv $RPM_BUILD_ROOT%{_docdir}/cmus/* $RPM_BUILD_ROOT%{_docdir}/cmus-%{version}
-# rmdir $RPM_BUILD_ROOT%{_docdir}/cmus
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -243,11 +265,13 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/cmus
 %dir %{_libdir}/cmus/ip
 %dir %{_libdir}/cmus/op
+%dir %{_examplesdir}/%{name}
 %doc AUTHORS README
 %attr(755,root,root) %{_bindir}/*
 %{_datadir}/%{name}
 %{_mandir}/man1/cmus*
 %{_mandir}/man7/cmus*
+%{_examplesdir}/%{name}/%{name}-status-display
 
 # input plugins
 %files input-aac
@@ -273,6 +297,10 @@ rm -rf $RPM_BUILD_ROOT
 %files input-mp4
 %defattr(644,root,root,755)
 %{_libdir}/cmus/ip/mp4.so
+
+%files input-mpc
+%defattr(644,root,root,755)
+%{_libdir}/cmus/ip/mpc.so
 
 %files input-vorbis
 %defattr(644,root,root,755)
@@ -302,3 +330,7 @@ rm -rf $RPM_BUILD_ROOT
 %files output-oss
 %defattr(644,root,root,755)
 %{_libdir}/cmus/op/oss.so
+
+%files output-pulse
+%defattr(644,root,root,755)
+%{_libdir}/cmus/op/pulse.so
