@@ -9,7 +9,7 @@ Source0:	http://downloads.sourceforge.net/project/cmus/%{name}-v%{version}.tar.b
 # Source0-md5:	47698e355cff2e7b985a22475099c100
 URL:		http://cmus.sourceforge.net/
 BuildRequires:	alsa-lib-devel
-BuildRequires:	arts-devel
+#BuildRequires:	arts-devel
 BuildRequires:	faad2-devel
 BuildRequires:	ffmpeg-devel
 BuildRequires:	libao-devel
@@ -21,6 +21,7 @@ BuildRequires:	libvorbis-devel
 BuildRequires:	mpeg4ip-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	pkg-config
+BuildRequires:	pulseaudio-devel
 BuildRequires:	sed > 4.0
 BuildRequires:	wavpack-devel
 Suggests:	%{name}-input
@@ -323,9 +324,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/cmus/op/ao.so
 
+%if 0
 %files output-arts
 %defattr(644,root,root,755)
 %{_libdir}/cmus/op/arts.so
+%endif
 
 %files output-oss
 %defattr(644,root,root,755)
