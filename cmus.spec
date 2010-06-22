@@ -1,15 +1,18 @@
+%bcond_with	arts
 Summary:	cmus is a small and fast text mode music player
 Summary(hu.UTF-8):	cmus egy kicsi és gyors szöveges zenelejátszó
 Name:		cmus
-Version:	2.3.2
+Version:	2.3.3
 Release:	0.1
 License:	GPL
 Group:		Applications/Sound
 Source0:	http://downloads.sourceforge.net/project/cmus/%{name}-v%{version}.tar.bz2
-# Source0-md5:	47698e355cff2e7b985a22475099c100
+# Source0-md5:	220e875e4210a6b54882114ef7094a79
 URL:		http://cmus.sourceforge.net/
 BuildRequires:	alsa-lib-devel
-#BuildRequires:	arts-devel
+%if %{with arts}
+BuildRequires:	arts-devel
+%endif
 BuildRequires:	faad2-devel
 BuildRequires:	ffmpeg-devel
 BuildRequires:	libao-devel
@@ -242,7 +245,11 @@ pulse plugin cmus-hoz.
 
 %build
 
-./configure prefix=%{_prefix} \
+./configure \
+%if %{without arts}
+	CONFIG_ARTS=n \
+%endif
+	prefix=%{_prefix} \
 	libdir=%{_libdir} \
 	mandir=%{_mandir} \
 	bindir=%{_bindir} \
@@ -324,7 +331,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/cmus/op/ao.so
 
-%if 0
+%if %{with arts}
 %files output-arts
 %defattr(644,root,root,755)
 %{_libdir}/cmus/op/arts.so
