@@ -2,12 +2,12 @@
 Summary:	cmus is a small and fast text mode music player
 Summary(hu.UTF-8):	cmus egy kicsi és gyors szöveges zenelejátszó
 Name:		cmus
-Version:	2.3.3
+Version:	2.3.4
 Release:	0.1
 License:	GPL
 Group:		Applications/Sound
 Source0:	http://downloads.sourceforge.net/project/cmus/%{name}-v%{version}.tar.bz2
-# Source0-md5:	220e875e4210a6b54882114ef7094a79
+# Source0-md5:	10629719fd0bff2d3c322ac24834af35
 URL:		http://cmus.sourceforge.net/
 BuildRequires:	alsa-lib-devel
 %if %{with arts}
