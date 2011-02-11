@@ -15,6 +15,7 @@ BuildRequires:	arts-devel
 %endif
 BuildRequires:	faad2-devel
 BuildRequires:	ffmpeg-devel
+BuildRequires:	flac-devel
 BuildRequires:	libao-devel
 BuildRequires:	libmad-devel
 BuildRequires:	libmodplug-devel
