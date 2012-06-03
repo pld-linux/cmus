@@ -26,7 +26,7 @@ BuildRequires:	mpeg4ip-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	pkg-config
 BuildRequires:	pulseaudio-devel
-BuildRequires:	sed > 4.0
+BuildRequires:	sed >= 4.0
 BuildRequires:	wavpack-devel
 Suggests:	%{name}-input
 Suggests:	%{name}-output
