@@ -1,14 +1,18 @@
-%bcond_with	arts
-Summary:	cmus is a small and fast text mode music player
+#
+# Conditional build:
+%bcond_with	arts	# aRts support
+
+Summary:	cmus - a small and fast text mode music player
 Summary(hu.UTF-8):	cmus egy kicsi és gyors szöveges zenelejátszó
+Summary(pl.UTF-8):	cmus - mały i szybki odtwarzacz muzyki w trybie tekstowym
 Name:		cmus
 Version:	2.4.3
 Release:	0.1
 License:	GPL
 Group:		Applications/Sound
-Source0:	http://downloads.sourceforge.net/project/cmus/%{name}-v%{version}.tar.bz2
+Source0:	https://downloads.sourceforge.net/project/cmus/%{name}-v%{version}.tar.bz2
 # Source0-md5:	75452cf007637214c4ab5444e076114b
-URL:		http://cmus.sourceforge.net/
+URL:		https://cmus.sourceforge.net/
 BuildRequires:	alsa-lib-devel
 %if %{with arts}
 BuildRequires:	arts-devel
@@ -35,212 +39,272 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 cmus is a small and fast text mode music player.
 
-%description -l pl.UTF-8
+%description -l hu.UTF-8
 cmus egy kicsi és gyors szöveges zenelejátszó.
 
+%description -l pl.UTF-8
+cmus to mały i szybki odtwarzacz muzyki, działający w trybie
+tekstowym.
 
 # input plugins
 
 %package input-aac
-Summary:	aac plugin for cmus
+Summary:	aac input plugin for cmus
 Summary(hu.UTF-8):	aac plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wejściowa aac dla odtwarzacza cmus
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-input
 
 %description input-aac
-aac plugin for cmus.
+aac input plugin for cmus.
 
 %description input-aac -l hu.UTF-8
 aac plugin cmus-hoz.
 
+%description input-aac -l pl.UTF-8
+Wtyczka wejściowa aac dla odtwarzacza cmus.
+
 %package input-ffmpeg
-Summary:	ffmpeg plugin for cmus
+Summary:	ffmpeg input plugin for cmus
 Summary(hu.UTF-8):	ffmpeg plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wejściowa ffmpeg dla odtwarzacza cmus
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-input
 
 %description input-ffmpeg
-ffmpeg plugin for cmus.
+ffmpeg input plugin for cmus.
 
 %description input-ffmpeg -l hu.UTF-8
 ffmpeg plugin cmus-hoz.
 
+%description input-ffmpeg -l pl.UTF-8
+Wtyczka wejściowa ffmpeg dla odtwarzacza cmus.
+
 %package input-flac
-Summary:	flac plugin for cmus
+Summary:	flac input plugin for cmus
 Summary(hu.UTF-8):	flac plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wejściowa flac dla odtwarzacza cmus
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-input
 
 %description input-flac
-flac plugin for cmus.
+flac input plugin for cmus.
 
 %description input-flac -l hu.UTF-8
 flac plugin cmus-hoz.
 
+%description input-flac -l pl.UTF-8
+Wtyczka wejściowa flac dla odtwarzacza cmus.
+
 %package input-mad
-Summary:	mad plugin for cmus
+Summary:	mad input plugin for cmus
 Summary(hu.UTF-8):	mad plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wejściowa mad dla odtwarzacza cmus
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-input
 
 %description input-mad
-mad plugin for cmus.
+mad input plugin for cmus.
 
 %description input-mad -l hu.UTF-8
 mad plugin cmus-hoz.
 
+%description input-mad -l pl.UTF-8
+Wtyczka wejściowa mad dla odtwarzacza cmus.
+
 %package input-modplug
-Summary:	modplug plugin for cmus
+Summary:	modplug input plugin for cmus
 Summary(hu.UTF-8):	modplug plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wejściowa modplug dla odtwarzacza cmus
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-input
 
 %description input-modplug
-modplug plugin for cmus.
+modplug input plugin for cmus.
 
 %description input-modplug -l hu.UTF-8
 modplug plugin cmus-hoz.
 
+%description input-modplug -l pl.UTF-8
+Wtyczka wejściowa modplug dla odtwarzacza cmus.
+
 %package input-mp4
-Summary:	mp4 plugin for cmus
+Summary:	mp4 input plugin for cmus
 Summary(hu.UTF-8):	mp4 plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wejściowa mp4 dla odtwarzacza cmus
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-input
 
 %description input-mp4
-mp4 plugin for cmus.
+mp4 input plugin for cmus.
 
 %description input-mp4 -l hu.UTF-8
 mp4 plugin cmus-hoz.
 
+%description input-mp4 -l pl.UTF-8
+Wtyczka wejściowa mp4 dla odtwarzacza cmus.
+
 %package input-mpc
-Summary:	mpc plugin for cmus
+Summary:	mpc input plugin for cmus
 Summary(hu.UTF-8):	mpc plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wejściowa mpc dla odtwarzacza cmus
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-input
 
 %description input-mpc
-mpc plugin for cmus.
+mpc input plugin for cmus.
 
 %description input-mpc -l hu.UTF-8
 mpc plugin cmus-hoz.
 
+%description input-mpc -l pl.UTF-8
+Wtyczka wejściowa mpc dla odtwarzacza cmus.
+
 %package input-vorbis
-Summary:	vorbis plugin for cmus
+Summary:	vorbis input plugin for cmus
 Summary(hu.UTF-8):	vorbis plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wejściowa vorbis dla odtwarzacza cmus
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-input
 
 %description input-vorbis
-vorbis plugin for cmus.
+vorbis input plugin for cmus.
 
 %description input-vorbis -l hu.UTF-8
 vorbis plugin cmus-hoz.
 
+%description input-vorbis -l pl.UTF-8
+Wtyczka wejściowa vorbis dla odtwarzacza cmus.
+
 %package input-wav
-Summary:	wav plugin for cmus
+Summary:	wav input plugin for cmus
 Summary(hu.UTF-8):	wav plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wejściowa wav dla odtwarzacza cmus
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-input
 
 %description input-wav
-wav plugin for cmus.
+wav input plugin for cmus.
 
 %description input-wav -l hu.UTF-8
 wav plugin cmus-hoz.
 
+%description input-wav -l pl.UTF-8
+Wtyczka wejściowa wav dla odtwarzacza cmus.
+
 %package input-wavpack
-Summary:	wavpack plugin for cmus
+Summary:	wavpack input plugin for cmus
 Summary(hu.UTF-8):	wavpack plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wejściowa wavpack dla odtwarzacza cmus
 Group:		Applications/Sound
 Requires:	%{name} = %{version}
 Provides:	%{name}-input
 
 %description input-wavpack
-wavpack plugin for cmus.
+wavpack input plugin for cmus.
 
 %description input-wavpack -l hu.UTF-8
 wavpack plugin cmus-hoz.
 
+%description input-wavpack -l pl.UTF-8
+Wtyczka wejściowa wavpack dla odtwarzacza cmus.
 
 # output plugins
 
 %package output-alsa
-Summary:	alsa plugin for cmus
+Summary:	alsa output plugin for cmus
 Summary(hu.UTF-8):	alsa plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wyjściowa alsa dla odtwarzacza cmus
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-output
 
 %description output-alsa
-alsa plugin for cmus.
+alsa output plugin for cmus.
 
 %description output-alsa -l hu.UTF-8
 alsa plugin cmus-hoz.
 
 %package output-arts
-Summary:	arts plugin for cmus
+Summary:	arts output plugin for cmus
 Summary(hu.UTF-8):	arts plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wyjściowa arts dla odtwarzacza cmus
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-output
 
 %description output-arts
-arts plugin for cmus.
+arts output plugin for cmus.
 
 %description output-arts -l hu.UTF-8
 arts plugin cmus-hoz.
 
+%description output-arts -l pl.UTF-8
+Wtyczka wyjściowa arts dla odtwarzacza cmus.
+
 %package output-libao
-Summary:	libao plugin for cmus
+Summary:	libao output plugin for cmus
 Summary(hu.UTF-8):	libao plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wyjściowa libao dla odtwarzacza cmus
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-output
 
 %description output-libao
-libao plugin for cmus.
+libao output plugin for cmus.
 
 %description output-libao -l hu.UTF-8
 libao plugin cmus-hoz.
 
+%description output-libao -l pl.UTF-8
+Wtyczka wyjściowa libao dla odtwarzacza cmus.
+
 %package output-oss
-Summary:	oss plugin for cmus
+Summary:	oss output plugin for cmus
 Summary(hu.UTF-8):	oss plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wyjściowa oss dla odtwarzacza cmus
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-output
 
 %description output-oss
-oss plugin for cmus.
+oss output plugin for cmus.
 
 %description output-oss -l hu.UTF-8
 oss plugin cmus-hoz.
 
+%description output-oss -l pl.UTF-8
+Wtyczka wyjściowa oss dla odtwarzacza cmus.
+
 %package output-pulse
-Summary:	pulse plugin for cmus
+Summary:	pulse output plugin for cmus
 Summary(hu.UTF-8):	pulse plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wyjściowa pulse dla odtwarzacza cmus
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-output
 
 %description output-pulse
-pulse plugin for cmus.
+pulse output plugin for cmus.
 
 %description output-pulse -l hu.UTF-8
 pulse plugin cmus-hoz.
 
+%description output-pulse -l pl.UTF-8
+Wtyczka wyjściowa pulse dla odtwarzacza cmus.
+
 %prep
 %setup -q -n %{name}-v%{version}
+
 %{__sed} -i "s|<curses.h>|<ncursesw/ncurses.h>|" command_mode.c keys.c options.c search_mode.c ui_curses.c
 %{__sed} -r -i "s|<ffmpeg/(.*).h|<lib\1/\1.h|" ffmpeg.c
 
@@ -258,10 +322,9 @@ pulse plugin cmus-hoz.
 	exampledir=%{_examplesdir}/%{name}
 %{__make}
 
-
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT
+#install -d $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
