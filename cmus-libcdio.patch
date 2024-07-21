@@ -1,0 +1,61 @@
+--- cmus-v2.5.0/cdio.c.orig	2012-11-07 09:46:17.000000000 +0100
++++ cmus-v2.5.0/cdio.c	2024-07-21 19:47:23.823587037 +0200
+@@ -352,36 +352,31 @@ static int libcdio_read_comments(struct
+ 	GROWING_KEYVALS(c);
+ 	const char *artist = NULL, *albumartist = NULL, *album = NULL,
+ 		*title = NULL, *genre = NULL, *comment = NULL;
+-	const cdtext_t *cdtext_track, *cdtext_album;
++	cdtext_t *cdtext_buf;
+ #ifdef HAVE_CDDB
+ 	cddb_conn_t *cddb_conn = NULL;
+ 	cddb_disc_t *cddb_disc = NULL;
+ #endif
+ 	char buf[64];
+ 
+-	cdtext_track = cdio_get_cdtext(priv->cdio, priv->track);
+-	if (cdtext_track) {
++	cdtext_buf = cdio_get_cdtext(priv->cdio);
++	if (cdtext_buf) {
+-		char * const *field = cdtext_track->field;
+-		artist = field[CDTEXT_PERFORMER];
+-		title = field[CDTEXT_TITLE];
+-		genre = field[CDTEXT_GENRE];
+-		comment = field[CDTEXT_MESSAGE];
+-	}
+-	cdtext_album = cdio_get_cdtext(priv->cdio, 0);
+-	if (cdtext_album) {
+-		char * const *field = cdtext_album->field;
+-		album = field[CDTEXT_TITLE];
+-		albumartist = field[CDTEXT_PERFORMER];
++		artist = cdtext_get_const(cdtext_buf, CDTEXT_FIELD_PERFORMER, priv->track);
++		title = cdtext_get_const(cdtext_buf, CDTEXT_FIELD_TITLE, priv->track);
++		genre = cdtext_get_const(cdtext_buf, CDTEXT_FIELD_GENRE, priv->track);
++		comment = cdtext_get_const(cdtext_buf, CDTEXT_FIELD_MESSAGE, priv->track);
++		album = cdtext_get_const(cdtext_buf, CDTEXT_FIELD_TITLE, 0);
++		albumartist = cdtext_get_const(cdtext_buf, CDTEXT_FIELD_PERFORMER, 0);
+ 		if (!artist)
+-			artist = field[CDTEXT_PERFORMER];
++			artist = cdtext_get_const(cdtext_buf, CDTEXT_FIELD_PERFORMER, 0);
+ 		if (!genre)
+-			genre = field[CDTEXT_GENRE];
++			genre = cdtext_get_const(cdtext_buf, CDTEXT_FIELD_GENRE, 0);
+ 		if (!comment)
+-			comment = field[CDTEXT_MESSAGE];
++			comment = cdtext_get_const(cdtext_buf, CDTEXT_FIELD_MESSAGE, 0);
+ 	}
+ 
+ #ifdef HAVE_CDDB
+-	if (!cdtext_track && cddb_url && cddb_url[0]) {
++	if (!cdtext_buf && cddb_url && cddb_url[0]) {
+ 		cddb_track_t *cddb_track;
+ 		track_t i_tracks = cdio_get_num_tracks(priv->cdio);
+ 		track_t i_first_track = cdio_get_first_track_num(priv->cdio);
+@@ -442,6 +438,8 @@ static int libcdio_read_comments(struct
+ 	if (cddb_conn)
+ 		cddb_destroy(cddb_conn);
+ #endif
++	if (cdtext_buf != NULL)
++		cdtext_destroy(cdtext_buf);
+ 
+ 	keyvals_terminate(&c);
+ 	*comments = c.keyvals;

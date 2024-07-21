@@ -1,39 +1,52 @@
 #
 # Conditional build:
 %bcond_with	arts	# aRts support
+%bcond_with	ffmpeg	# FFmpeg support (outdated)
 
 Summary:	cmus - a small and fast text mode music player
 Summary(hu.UTF-8):	cmus egy kicsi és gyors szöveges zenelejátszó
 Summary(pl.UTF-8):	cmus - mały i szybki odtwarzacz muzyki w trybie tekstowym
 Name:		cmus
-Version:	2.4.3
-Release:	0.1
-License:	GPL
+Version:	2.5.0
+Release:	1
+License:	GPL v2+
 Group:		Applications/Sound
 Source0:	https://downloads.sourceforge.net/project/cmus/%{name}-v%{version}.tar.bz2
-# Source0-md5:	75452cf007637214c4ab5444e076114b
+# Source0-md5:	9af16d324060447996ed25e1a9c1c7d8
+Patch0:		%{name}-libcdio.patch
+Patch1:		%{name}-libmodplug.patch
 URL:		https://cmus.sourceforge.net/
-BuildRequires:	alsa-lib-devel
+BuildRequires:	alsa-lib-devel >= 1.0.11
 %if %{with arts}
-BuildRequires:	arts-devel
+BuildRequires:	artsc-devel
 %endif
 BuildRequires:	faad2-devel
-BuildRequires:	ffmpeg-devel
+%{?with_ffmpeg:BuildRequires:	ffmpeg-devel}
 BuildRequires:	flac-devel
 BuildRequires:	libao-devel
+BuildRequires:	libcddb-devel
+BuildRequires:	libcdio-devel
+BuildRequires:	libcue-devel >= 1.3
+BuildRequires:	libdiscid-devel
 BuildRequires:	libmad-devel
+BuildRequires:	libmikmod-devel
 BuildRequires:	libmodplug-devel
 BuildRequires:	libmpcdec-devel
 BuildRequires:	libraw1394-devel
 BuildRequires:	libvorbis-devel
-BuildRequires:	mpeg4ip-devel
+BuildRequires:	mp4v2-devel
 BuildRequires:	ncurses-devel
-BuildRequires:	pkg-config
-BuildRequires:	pulseaudio-devel
+BuildRequires:	pkgconfig
+BuildRequires:	pulseaudio-devel >= 0.9.19
+# TODO
+#BuildRequires:	roaraudio-devel >= 0.4.5
 BuildRequires:	sed >= 4.0
 BuildRequires:	wavpack-devel
 Suggests:	%{name}-input
 Suggests:	%{name}-output
+%if %{without ffmpeg}
+Obsoletes:	cmus-input-ffmpeg < %{version}-%{release}
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -64,6 +77,40 @@ aac plugin cmus-hoz.
 
 %description input-aac -l pl.UTF-8
 Wtyczka wejściowa aac dla odtwarzacza cmus.
+
+%package input-cdio
+Summary:	cdio input plugin for cmus
+Summary(hu.UTF-8):	cdio plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wejściowa cdio dla odtwarzacza cmus
+Group:		Applications/Sound
+Requires:	%{name} = %{version}-%{release}
+Provides:	%{name}-input
+
+%description input-cdio
+cdio input plugin for cmus.
+
+%description input-cdio -l hu.UTF-8
+cdio plugin cmus-hoz.
+
+%description input-cdio -l pl.UTF-8
+Wtyczka wejściowa cdio dla odtwarzacza cmus.
+
+%package input-cue
+Summary:	cue input plugin for cmus
+Summary(hu.UTF-8):	cue plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wejściowa cue dla odtwarzacza cmus
+Group:		Applications/Sound
+Requires:	%{name} = %{version}-%{release}
+Provides:	%{name}-input
+
+%description input-cue
+cue input plugin for cmus.
+
+%description input-cue -l hu.UTF-8
+cue plugin cmus-hoz.
+
+%description input-cue -l pl.UTF-8
+Wtyczka wejściowa cue dla odtwarzacza cmus.
 
 %package input-ffmpeg
 Summary:	ffmpeg input plugin for cmus
@@ -304,13 +351,16 @@ Wtyczka wyjściowa pulse dla odtwarzacza cmus.
 
 %prep
 %setup -q -n %{name}-v%{version}
+%patch0 -p1
+%patch1 -p1
 
 %{__sed} -i "s|<curses.h>|<ncursesw/ncurses.h>|" command_mode.c keys.c options.c search_mode.c ui_curses.c
-%{__sed} -r -i "s|<ffmpeg/(.*).h|<lib\1/\1.h|" ffmpeg.c
 
 %build
-
 ./configure \
+	CC="%{__cc}" \
+	CFLAGS="%{rpmcflags}" \
+	LDFLAGS="%{rpmldflags}" \
 %if %{without arts}
 	CONFIG_ARTS=n \
 %endif
@@ -319,12 +369,13 @@ Wtyczka wyjściowa pulse dla odtwarzacza cmus.
 	mandir=%{_mandir} \
 	bindir=%{_bindir} \
 	datadir=%{_datadir}/%{name} \
-	exampledir=%{_examplesdir}/%{name}
-%{__make}
+	exampledir=%{_examplesdir}/%{name}-%{version}
+
+%{__make} \
+	V=2
 
 %install
 rm -rf $RPM_BUILD_ROOT
-#install -d $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -334,25 +385,37 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc AUTHORS README
+%attr(755,root,root) %{_bindir}/cmus
+%attr(755,root,root) %{_bindir}/cmus-remote
 %dir %{_libdir}/cmus
 %dir %{_libdir}/cmus/ip
 %dir %{_libdir}/cmus/op
-%dir %{_examplesdir}/%{name}
-%doc AUTHORS README
-%attr(755,root,root) %{_bindir}/*
 %{_datadir}/%{name}
-%{_mandir}/man1/cmus*
-%{_mandir}/man7/cmus*
-%{_examplesdir}/%{name}/%{name}-status-display
+%{_mandir}/man1/cmus.1*
+%{_mandir}/man1/cmus-remote.1*
+%{_mandir}/man7/cmus-tutorial.7*
+%dir %{_examplesdir}/%{name}-%{version}
+%attr(755,root,root) %{_examplesdir}/%{name}-%{version}/%{name}-status-display
 
 # input plugins
 %files input-aac
 %defattr(644,root,root,755)
 %{_libdir}/cmus/ip/aac.so
 
+%files input-cdio
+%defattr(644,root,root,755)
+%{_libdir}/cmus/ip/cdio.so
+
+%files input-cue
+%defattr(644,root,root,755)
+%{_libdir}/cmus/ip/cue.so
+
+%if %{with ffmpeg}
 %files input-ffmpeg
 %defattr(644,root,root,755)
 %{_libdir}/cmus/ip/ffmpeg.so
+%endif
 
 %files input-flac
 %defattr(644,root,root,755)

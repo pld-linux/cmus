@@ -1,0 +1,11 @@
+--- cmus-v2.5.0/modplug.c.orig	2012-11-07 09:46:17.000000000 +0100
++++ cmus-v2.5.0/modplug.c	2024-07-21 19:55:38.450907410 +0200
+@@ -24,7 +24,7 @@
+ #include "config/modplug.h"
+ #endif
+ 
+-#include <modplug.h>
++#include <libmodplug/modplug.h>
+ #include <sys/types.h>
+ #include <unistd.h>
+ #include <stdlib.h>
