@@ -351,8 +351,8 @@ Wtyczka wyjściowa pulse dla odtwarzacza cmus.
 
 %prep
 %setup -q -n %{name}-v%{version}
-%patch0 -p1
-%patch1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 
 %{__sed} -i "s|<curses.h>|<ncursesw/ncurses.h>|" command_mode.c keys.c options.c search_mode.c ui_curses.c
 
