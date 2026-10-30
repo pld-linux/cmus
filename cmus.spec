@@ -1,8 +1,8 @@
-# TODO libbass+bass.h, libayemu+ayemu.h
 #
 # Conditional build:
-%bcond_with	arts	# aRts support
-%bcond_without	ffmpeg	# FFmpeg support
+%bcond_with	arts	# aRts output plugin
+%bcond_with	bass	# BASS input plugin (non-free, functionality similar to modplug)
+%bcond_without	ffmpeg	# FFmpeg input plugin
 
 Summary:	cmus - a small and fast text mode music player
 Summary(hu.UTF-8):	cmus egy kicsi és gyors szöveges zenelejátszó
@@ -26,6 +26,8 @@ BuildRequires:	flac-devel
 BuildRequires:	gcc >= 6:4.7
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	libao-devel
+BuildRequires:	libayemu-devel
+%{?with_bass:BuildRequires:	libbass-devel}
 BuildRequires:	libcddb-devel
 BuildRequires:	libcdio-devel
 BuildRequires:	libcdio-paranoia-devel
@@ -83,6 +85,23 @@ AAC plugin cmus-hoz.
 
 %description input-aac -l pl.UTF-8
 Wtyczka wejściowa AAC dla odtwarzacza cmus.
+
+%package input-bass
+Summary:	BASS (mod/x3m/...) input plugin for cmus
+Summary(hu.UTF-8):	BASS (mod/x3m/...) plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wejściowa BASS (mod/x3m/...) dla odtwarzacza cmus
+Group:		Applications/Sound
+Requires:	%{name}%{?_isa} = %{version}-%{release}
+Provides:	%{name}-input = %{version}-%{release}
+
+%description input-bass
+BASS (mod/x3m/...) input plugin for cmus.
+
+%description input-bass -l hu.UTF-8
+BASS (mod/x3m/...) plugin cmus-hoz.
+
+%description input-bass -l pl.UTF-8
+Wtyczka wejściowa BASS (mod/x3m/...) dla odtwarzacza cmus.
 
 %package input-cdio
 Summary:	cdio (CD Audio) input plugin for cmus
@@ -170,21 +189,21 @@ mad (MP3) plugin cmus-hoz.
 Wtyczka wejściowa mad (MP3) dla odtwarzacza cmus.
 
 %package input-modplug
-Summary:	modplug input plugin for cmus
-Summary(hu.UTF-8):	modplug plugin cmus-hoz
-Summary(pl.UTF-8):	Wtyczka wejściowa modplug dla odtwarzacza cmus
+Summary:	modplug (mod/x3m/...) input plugin for cmus
+Summary(hu.UTF-8):	modplug (mod/x3m/...) plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wejściowa modplug (mod/x3m/...) dla odtwarzacza cmus
 Group:		Applications/Sound
 Requires:	%{name}%{?_isa} = %{version}-%{release}
 Provides:	%{name}-input = %{version}-%{release}
 
 %description input-modplug
-modplug input plugin for cmus.
+modplug (mod/x3m/...) input plugin for cmus.
 
 %description input-modplug -l hu.UTF-8
-modplug plugin cmus-hoz.
+modplug (mod/x3m/...) plugin cmus-hoz.
 
 %description input-modplug -l pl.UTF-8
-Wtyczka wejściowa modplug dla odtwarzacza cmus.
+Wtyczka wejściowa modplug (mod/x3m/...) dla odtwarzacza cmus.
 
 %package input-mp4
 Summary:	MP4 input plugin for cmus
@@ -253,6 +272,23 @@ Vorbis plugin cmus-hoz.
 
 %description input-vorbis -l pl.UTF-8
 Wtyczka wejściowa Vorbis dla odtwarzacza cmus.
+
+%package input-vtx
+Summary:	VTX (AY-3-891x) input plugin for cmus
+Summary(hu.UTF-8):	VTX (AY-3-891x) plugin cmus-hoz
+Summary(pl.UTF-8):	Wtyczka wejściowa VTX (AY-3-891x) dla odtwarzacza cmus
+Group:		Applications/Sound
+Requires:	%{name}%{?_isa} = %{version}-%{release}
+Provides:	%{name}-input = %{version}-%{release}
+
+%description input-vtx
+VTX (AY-3-891x) input plugin for cmus.
+
+%description input-vtx -l hu.UTF-8
+VTX (AY-3-891x) plugin cmus-hoz.
+
+%description input-vtx -l pl.UTF-8
+Wtyczka wejściowa VTX (AY-3-891x) dla odtwarzacza cmus.
 
 %package input-wav
 Summary:	WAV input plugin for cmus
@@ -397,14 +433,17 @@ Wtyczka wyjściowa PulseAudio dla odtwarzacza cmus.
 
 %{__sed} -i "s|<curses.h>|<ncursesw/ncurses.h>|" options.c ui_curses.c
 
+%if %{with bass}
+ln -sf %{_includedir}/bass.h bass.h
+%endif
+
 %build
 ./configure \
 	CC="%{__cc}" \
 	CFLAGS="%{rpmcflags}" \
 	LDFLAGS="%{rpmldflags}" \
-%if %{without arts}
-	CONFIG_ARTS=n \
-%endif
+	%{!?with_arts:CONFIG_ARTS=n} \
+	%{?with_bass:CONFIG_BASS=y} \
 	prefix=%{_prefix} \
 	libdir=%{_libdir} \
 	mandir=%{_mandir} \
@@ -443,6 +482,12 @@ rm -rf $RPM_BUILD_ROOT
 %files input-aac
 %defattr(644,root,root,755)
 %{_libdir}/cmus/ip/aac.so
+
+%if %{with bass}
+%files input-bass
+%defattr(644,root,root,755)
+%{_libdir}/cmus/ip/bass.so
+%endif
 
 %files input-cdio
 %defattr(644,root,root,755)
@@ -485,6 +530,10 @@ rm -rf $RPM_BUILD_ROOT
 %files input-vorbis
 %defattr(644,root,root,755)
 %{_libdir}/cmus/ip/vorbis.so
+
+%files input-vtx
+%defattr(644,root,root,755)
+%{_libdir}/cmus/ip/vtx.so
 
 %files input-wav
 %defattr(644,root,root,755)
