@@ -9,7 +9,7 @@ Summary(hu.UTF-8):	cmus egy kicsi és gyors szöveges zenelejátszó
 Summary(pl.UTF-8):	cmus - mały i szybki odtwarzacz muzyki w trybie tekstowym
 Name:		cmus
 Version:	2.13.0
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Applications/Sound
 #Source0Download: https://github.com/cmus/cmus/releases
